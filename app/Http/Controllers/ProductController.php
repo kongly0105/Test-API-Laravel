@@ -39,11 +39,24 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update($request->all());
+        return $product;
     }
 
     public function destroy($id)
     {
-        //
+        return Product::destroy($id);
+    }
+
+    /**
+    * Search for a name
+    *
+    * @param str $name
+    * @return \Illuminate\Http\Response
+    */
+    public function search($name)
+    {
+        return Product::where('name', 'like', '%'.$name.'%')->get();
     }
 }
